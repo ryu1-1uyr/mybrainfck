@@ -2,8 +2,9 @@
 
     // Declare Variable
     const inputs  = [...stdin+[]]
-    let output = '';
+    let outputs = '';
     // Main Procedure
+    console.log(outputs)
 
 
     // ASCII文字。制御文字は単なる文字列で代用
@@ -52,7 +53,7 @@
 
                 while (true) {
                     if (input.length <= j) {
-                        throw 'invalid brace pare';
+                        throw 'check_brace!!!invalid brace pare';
                     }
 
                     if (input[j] == '[') {
@@ -75,14 +76,13 @@
         }
     };
 
-// 入力を評価
-    let eval_input = function (input) {
+// 入力を評価 配列とって of使うやつにする
+    let eval_input = function (inputarr) {
         let output = '';
 
-        for (let i = 0; i < input.length; ++i) {
-            let command = input[i];
+        for (let i of inputarr) {
 
-            switch (command) {
+            switch (i) {
                 case '>': pointer++; break;
                 case '<': pointer--; break;
                 case '+': memory[pointer]++; break;
@@ -92,8 +92,10 @@
                 case ']': memory[pointer] != 0 && (i = braces[i]); break;
             }
 
+            console.log(memory[pointer])
             if (pointer < 0 || memory.length <= pointer) {
-                throw 'pointer out of range (' + pointer + ')';
+                console.log( memory.length , pointer)
+                throw 'eval_input!! pointer out of range (' + pointer + ')';
             }
         }
 
@@ -102,19 +104,19 @@
 
 /////////////////////////////// 開始
         try {
-            check_brace(input.value);
-            output = eval_input(input.value);
+            check_brace(inputs);
+            outputs = eval_input(inputs);
         } catch (e) {
-            output = e;
+            outputs = e;
         }
 
         release();
 
-    console.log(output);
+    console.log(outputs);
 
     release();
 
 
-    console.log(inputs)
+    // console.log(inputs)
 
 })(require('fs').readFileSync('/dev/stdin', 'utf8'));
