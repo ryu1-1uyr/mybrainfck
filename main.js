@@ -111,3 +111,12 @@ document.getElementById('exec').addEventListener('click', function () {
 release();
 
 
+(stdin => {
+
+    // Declare Variable
+    const inputs  = [...stdin+[]]
+    // Main Procedure
+
+    console.log(inputs)
+
+})(require('fs').readFileSync('/dev/stdin', 'utf8'));
