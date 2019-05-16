@@ -1,6 +1,6 @@
 
 // ASCII文字。制御文字は単なる文字列で代用
-var chars = [
+let chars = [
     '<NUL>', '<SOH>', '<STX>', '<ETX>', '<EOT>', '<ENQ>', '<ACK>', '<BEL>',
     '<BS>', '<HT>', '<LF>', '<VT>', '<NP>', '<CR>', '<SO>', '<SI>',
     '<DLE>', '<DC1>', '<DC2>', '<DC3>', '<DC4>', '<NAK>', '<SYN>', '<ETB>',
@@ -19,18 +19,18 @@ var chars = [
     'x', 'y', 'z', '{', '|', '}', '~', 'DEL'
 ];
 
-var pointer = 0;  // ポインタ。メモリのインデックス
-var memory = []; // メモリに見せかけた単なる配列
+let pointer = 0;  // ポインタ。メモリのインデックス
+let memory = []; // メモリに見せかけた単なる配列
 
-var braces = []; // 括弧の対応
-var brace_stack = []; // 括弧の対応チェック用
+let braces = []; // 括弧の対応
+let brace_stack = []; // 括弧の対応チェック用
 
-var input = document.getElementById('input');  // 入力欄
-var output = document.getElementById('output'); // 出力欄
+let input = document.getElementById('input');  // 入力欄
+let output = document.getElementById('output'); // 出力欄
 
 // メモリを初期化
-var release = function () {
-    for (var i = 0; i < 256; ++i) {
+let release = function () {
+    for (let i = 0; i < 256; ++i) {
         memory[i] = 0;
     }
     pointer = 0;
@@ -39,12 +39,12 @@ var release = function () {
 };
 
 // 入力を括弧の対応を取って配列に格納
-var check_brace = function (input) {
-    for (var i in input) {
-        var command = input[i];
+let check_brace = function (input) {
+    for (let i in input) {
+        let command = input[i];
 
         if (command == '[') {
-            var j = i;
+            let j = i;
 
             while (true) {
                 if (input.length <= j) {
@@ -72,11 +72,11 @@ var check_brace = function (input) {
 };
 
 // 入力を評価
-var eval_input = function (input) {
-    var output = '';
+let eval_input = function (input) {
+    let output = '';
 
-    for (var i = 0; i < input.length; ++i) {
-        var command = input[i];
+    for (let i = 0; i < input.length; ++i) {
+        let command = input[i];
 
         switch (command) {
             case '>': pointer++; break;
